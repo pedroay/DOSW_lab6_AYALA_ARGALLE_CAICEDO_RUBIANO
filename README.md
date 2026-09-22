@@ -1,6 +1,14 @@
-# DOSW_lab6_AYALA_ARGALLE_CAICEDO
+# DOSW_lab6_AYALA_ARGALLE_CAICEDO_RUBIANO
 
-## PREGUNTAS 
+### Equipo de trabajo 
+- Juanita Rubiano
+- Javier Caicedo 
+- Samuel Argalle 
+- Pedro Ayala
+
+
+
+## PREGUNTAS TEORICAS --- PARTE 2  
 
 * ¿Para qué sirve el paquete Controller en la estructura Spring Boot?
 * ¿Para qué sirve el paquete Service en la estructura Spring Boot?
@@ -36,3 +44,12 @@ Oracle. (s. f.). Java Persistence API (JPA). Oracle Corporation. https://www.ora
 
 Baeldung. (s. f.). A guide to spring boot RESTful web services. Baeldung. https://www.baeldung.com/spring-boot-start
 
+
+
+## DIAGRAMA DE CLASES -- PARTE 3
+
+El diagrama de clases se construyó a partir de una propuesta inicial que contempla las clases mínimas necesarias para cumplir con los requerimientos relacionados con **User, Worker y Authentication**.
+
+Cada clase cuenta con su respectiva descripción, así como con los atributos necesarios para representar su funcionalidad. Además, se especifican los modificadores de acceso correspondientes para cada atributo. Las relaciones entre las clases también se encuentran definidas y cuentan con su respectivo nombre, permitiendo representar de manera clara la interacción y dependencia entre los diferentes componentes del sistema.
+
+![Imagen del diagrama ](![alt text](image.png))
