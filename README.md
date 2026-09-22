@@ -53,3 +53,17 @@ El diagrama de clases se construyó a partir de una propuesta inicial que contem
 Cada clase cuenta con su respectiva descripción, así como con los atributos necesarios para representar su funcionalidad. Además, se especifican los modificadores de acceso correspondientes para cada atributo. Las relaciones entre las clases también se encuentran definidas y cuentan con su respectivo nombre, permitiendo representar de manera clara la interacción y dependencia entre los diferentes componentes del sistema.
 
 ![Imagen del diagrama ](![alt text](image.png))
+
+
+## DESCRIPCION DEL CRUDE -- PARTE 4 
+### Crear (Create)
+El registro de un trabajador parte de los datos personales del usuario: nombre, correo, teléfono, contraseña y foto, los cuales se almacenan en User. Si la persona además desea ofrecer un oficio, se completan los datos propios de Worker: oficio principal, tarifa, zona de cobertura y disponibilidad. El sistema crea el User y le asocia el Worker correspondiente. Si la persona ya cuenta con un User registrado como contratante, no se crea una cuenta nueva; simplemente se le asocia el rol de Worker a la cuenta existente. Todo trabajador se crea por defecto con estado *Activo*.
+
+### Leer (Read)
+La consulta de información puede realizarse de forma individual (perfil de un trabajador específico) o en listado (por ejemplo, trabajadores disponibles en una zona). En ambos casos, la respuesta combina los datos públicos de User (nombre, foto) con los datos propios de Worker (oficio principal, oficios secundarios, tarifa, disponibilidad), excluyendo información sensible como correo, teléfono y contraseña.
+
+### Actualizar (Update)
+Un trabajador puede modificar los atributos de su perfil laboral (tarifa, oficio principal, oficios secundarios, disponibilidad), lo cual afecta únicamente a Worker. Los cambios sobre datos personales (nombre, foto) afectan a User de forma independiente. Como regla de negocio, *ningún atributo de Worker puede modificarse si su estado es Inactivo*.
+
+### Eliminar (Delete → Inactivar)
+No existe eliminación física de un trabajador. En su lugar, se provee una operación que cambia el estado de Worker de *Activo* a *Inactivo*. El User asociado no se ve afectado: la persona conserva su cuenta y puede seguir operando como contratante; únicamente su perfil de trabajador deja de estar activo y de aparecer en las búsquedas.
