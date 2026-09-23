@@ -1,18 +1,19 @@
-import java.time.LocalDateTime;
+package edu.eci.dosw.oficioya.model;
+
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
-import java.net.URL;
-
 
 public class Request {
     private String Job;
     private String description;
-    private ArrayList<URL> pictures;
+    private ArrayList<URL> pictures = new ArrayList<>();
     private String state;
     private Timer timer;
-    
-    private Employer employer;
-    private WorkZone neighborhood;
-    private Disponibility date;
+    private String address;
+
+    private User employer;
+    private Worker worker;
+    private List<Disponibility> workTime = new ArrayList<>();
 }

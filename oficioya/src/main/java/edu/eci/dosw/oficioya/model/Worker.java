@@ -1,18 +1,19 @@
-import java.time.LocalDateTime;
+package edu.eci.dosw.oficioya.model;
+
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.net.URL;
 
 public class Worker extends User {
     private int rate;
-    private String principalJob;
-    private ArrayList<String> secondaryJobs;
+    private ArrayList<Job> secondaryJobs = new ArrayList<>();
     private int salary;
     private int finishedJobs;
-    private ArrayList<URL> finishJobsPictures;
-    
-    private List<Request> requests;
-    private List<WorkZone> workZones;
-    private List<Disponibility> disponibilityHours;
+    private ArrayList<URL> finishJobsPictures = new ArrayList<>();
+    private boolean state;
+
+    private Job PrincipalJob;
+    private List<Request> workRequests = new ArrayList<>();
+    private WorkZone workZone;
+    private List<Disponibility> disponibilities = new ArrayList<>();
 }

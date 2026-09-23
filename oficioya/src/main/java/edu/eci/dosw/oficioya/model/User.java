@@ -1,15 +1,16 @@
-import java.time.LocalDateTime;
+package edu.eci.dosw.oficioya.model;
+
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.net.URL;
 
 public class User {
     private int id;
     private String nombre;
     private URL foto;
-    private String correo;
-    private int telefono;
+    protected String correo;
+    protected int telefono;
+    private String passwd;
     
-    private List<Notification> notifications;
+    private List<Notification> notifications = new ArrayList<>();
 }

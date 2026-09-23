@@ -1,11 +1,10 @@
-import java.time.LocalDateTime;
+package edu.eci.dosw.oficioya.model;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.net.URL;
 
 public class OficioYa {
-    private List<User> users;
-    private List<Request> requests;
+    private List<User> user = new ArrayList<>();
+    private List<Job> jobs = new ArrayList<>();
+    private List<WorkZone> workZones = new ArrayList<>();
 }
-
