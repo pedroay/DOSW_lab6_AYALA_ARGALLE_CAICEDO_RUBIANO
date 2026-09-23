@@ -67,3 +67,8 @@ Un trabajador puede modificar los atributos de su perfil laboral (tarifa, oficio
 
 ### Eliminar (Delete → Inactivar)
 No existe eliminación física de un trabajador. En su lugar, se provee una operación que cambia el estado de Worker de *Activo* a *Inactivo*. El User asociado no se ve afectado: la persona conserva su cuenta y puede seguir operando como contratante; únicamente su perfil de trabajador deja de estar activo y de aparecer en las búsquedas.
+
+
+# PARTE 5
+
+![swagger](/oficioya/src/main/resources/docs/images/swagger.png)
