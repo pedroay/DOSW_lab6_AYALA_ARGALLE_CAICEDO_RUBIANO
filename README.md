@@ -52,7 +52,7 @@ El diagrama de clases se construyó a partir de una propuesta inicial que contem
 
 Cada clase cuenta con su respectiva descripción, así como con los atributos necesarios para representar su funcionalidad. Además, se especifican los modificadores de acceso correspondientes para cada atributo. Las relaciones entre las clases también se encuentran definidas y cuentan con su respectivo nombre, permitiendo representar de manera clara la interacción y dependencia entre los diferentes componentes del sistema.
 
-![Imagen del diagrama ](![alt text](image.png))
+![Imagen del diagrama ](/oficioya/src/main/resources/docs/images/image.png)
 
 
 ## DESCRIPCION DEL CRUDE -- PARTE 4 
