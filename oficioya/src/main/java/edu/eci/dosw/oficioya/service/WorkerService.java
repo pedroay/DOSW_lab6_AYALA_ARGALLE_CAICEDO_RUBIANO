@@ -11,6 +11,8 @@ import edu.eci.dosw.oficioya.model.Job;
 import edu.eci.dosw.oficioya.model.User;
 import edu.eci.dosw.oficioya.model.Worker;
 import edu.eci.dosw.oficioya.model.WorkZone;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +21,7 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class WorkerService {
@@ -26,6 +29,7 @@ public class WorkerService {
     private final Map<Integer, Worker> workers = new ConcurrentHashMap<>();
     private final Map<String, User> usersByEmail = new ConcurrentHashMap<>();
     private final AtomicInteger idGenerator = new AtomicInteger(1);
+    private static final Logger log = LoggerFactory.getLogger(WorkerService.class);
 
     public WorkerService() {
         seedInitialData();
@@ -87,9 +91,11 @@ public class WorkerService {
      * requerimiento.
      */
     public List<WorkerResponseDTO> findAll(String zona, Boolean soloActivos) {
+        log.debug("Buscando trabajadores con zona: {} y soloActivos: {}", zona, soloActivos);
         return workers.values().stream()
                 .filter(w -> {
                     if (soloActivos != null && soloActivos && !w.isState()) {
+                        log.warn("Trabajador {} inactivo", w.getId());
                         return false;
                     }
                     if (zona != null && !zona.isBlank()) {
@@ -103,6 +109,7 @@ public class WorkerService {
                                 || localidad.toLowerCase().contains(query)
                                 || ciudad.toLowerCase().contains(query);
                     }
+                    log.info("Trabajador {} encontrado", w.getId());
                     return true;
                 })
                 .map(this::mapToResponseDTO)
@@ -113,10 +120,14 @@ public class WorkerService {
      * Consultar perfil de un solo trabajador por su ID.
      */
     public WorkerResponseDTO findById(int id) {
+        log.debug("Buscando trabajador con id: {}", id);
         Worker worker = workers.get(id);
         if (worker == null) {
             throw new ResourceNotFoundException("Trabajador con id " + id + " no encontrado.");
         }
+        
+        log.info("trabajador encontrado: {}", id);
+
         return mapToResponseDTO(worker);
     }
 
@@ -131,6 +142,7 @@ public class WorkerService {
      * El trabajador se crea por defecto con estado Activo.
      */
     public WorkerResponseDTO create(WorkerRegistrationDTO dto) {
+        log.debug("Registrando trabajador con correo: {}", dto.getCorreo());
         validateRegistrationFields(dto);
 
         String email = dto.getCorreo().trim().toLowerCase();
@@ -185,6 +197,7 @@ public class WorkerService {
         worker.setState(true);
 
         workers.put(worker.getId(), worker);
+        log.info("Trabajador creado exitosamente con id: {}", worker.getId());
         return mapToResponseDTO(worker);
     }
 
@@ -195,6 +208,7 @@ public class WorkerService {
      * Regla importante: Si el Worker está inactivo, NO se le puede actualizar nada.
      */
     public WorkerResponseDTO update(int id, WorkerUpdateDTO dto) {
+        log.debug("Actualizando trabajador con id: {}", id);
         Worker worker = workers.get(id);
         if (worker == null) {
             throw new ResourceNotFoundException("Trabajador con id " + id + " no encontrado.");
@@ -235,7 +249,7 @@ public class WorkerService {
                 worker.getUser().setFoto(dto.getFoto());
             }
         }
-
+        log.info("Trabajador actualizado exitosamente con id: {}", id);
         return mapToResponseDTO(worker);
     }
 
@@ -246,12 +260,14 @@ public class WorkerService {
      * como contratante.
      */
     public WorkerResponseDTO inactivate(int id) {
+        log.debug("Inactivando trabajador con id: {}", id);
         Worker worker = workers.get(id);
         if (worker == null) {
             throw new ResourceNotFoundException("Trabajador con id " + id + " no encontrado.");
         }
 
         worker.setState(false);
+        log.info("Trabajador inactivado exitosamente con id: {}", id);
         return mapToResponseDTO(worker);
     }
 
@@ -259,8 +275,10 @@ public class WorkerService {
      * Buscar un usuario por correo para autenticación.
      */
     public Optional<User> findUserByEmail(String email) {
+        log.debug("Buscando usuario con correo: {}", email);
         if (email == null)
             return Optional.empty();
+        log.info("Usuario encontrado con correo: {}", email);
         return Optional.ofNullable(usersByEmail.get(email.trim().toLowerCase()));
     }
 
